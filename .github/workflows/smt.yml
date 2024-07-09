@@ -2,7 +2,14 @@ name: Keep Codespace Alive
 
 on:
   schedule:
-    - cron: 0 0 */4 * * *  # Run every 30 minutes
+    - cron: '*/5 * * * *'
+    
+  workflow_dispatch:
+    inputs:
+      manual_run:
+      description: 'Manual run'
+      required: false
+      default: 'false'
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -21,4 +28,4 @@ jobs:
 
       - name: Run Python script
         run: |
-          python keep_codespace_alive.py
+          python main.py
