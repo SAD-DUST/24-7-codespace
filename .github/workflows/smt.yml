@@ -6,13 +6,11 @@ on:
     
   workflow_dispatch:
     inputs:
-      manual_run:
-      description: 'Manual run'
-      required: false
-      default: 'false'
+      lessons:
+        description: 'Number of lessons'
+        required: false
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 jobs:
   keep-codespace-alive:
@@ -29,3 +27,5 @@ jobs:
       - name: Run Python script
         run: |
           python main.py
+        env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
