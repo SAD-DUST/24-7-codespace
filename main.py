@@ -1,14 +1,18 @@
 import requests
 import time
 
+github_token = os.environ['GITHUB_TOKEN']
 codespace_url = "https://studious-space-tribble-74w54g55p94hpr96.github.dev/"
 
-while True:
-    try:
-        response = requests.get(codespace_url)
-        response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
-        print(f"Sent request to {codespace_url} at {time.strftime('%Y-%m-%d %H:%M:%S')}")
-    except requests.RequestException as e:
-        print(f"Error sending request: {e}")
+headers = {
+    "Authorization": f"Bearer {github_token}",
+    "Content-Type": "application/json"
+}
 
-    time.sleep(600)  # Sleep for 30 minutes
+while True:
+    response = requests.get(codespace_url, headers=headers)
+    if response.status_code == 200:
+        print(f"Codespace is running at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    else:
+        print(f"Error: {response.status_code}")
+    time.sleep(600)  # Wait for 10 minutes
