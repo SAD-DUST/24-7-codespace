@@ -6,7 +6,8 @@ codespace_url = "https://studious-space-tribble-74w54g55p94hpr96.github.dev/"
 
 headers = {
     "Authorization": f"Bearer {github_token}",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0"
 }
 
 while True:
