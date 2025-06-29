@@ -5,6 +5,8 @@ on:
     branches:
       - main
   workflow_dispatch: # Allows manual runs from GitHub UI
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
 
 jobs:
   run-bot:
@@ -17,7 +19,7 @@ jobs:
       - name: 🧰 Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # or '20' if your code needs it
+          node-version: '20'
 
       - name: 📦 Install dependencies
         run: npm install mineflayer
