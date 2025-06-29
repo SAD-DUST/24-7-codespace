@@ -30,5 +30,3 @@ jobs:
       - name: Run Python script
         run: |
           python main.py
-        env:
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
