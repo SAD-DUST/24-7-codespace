@@ -1,32 +1,26 @@
-name: Keep Codespace Alive
+name: Minecraft AFK Bot
 
 on:
-  schedule:
-    - cron: '* */5 * * *'
-    
-  workflow_dispatch:
-    inputs:
-      lessons:
-        description: 'Number of lessons'
-        required: false
-
-
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual runs from GitHub UI
 
 jobs:
-  keep-codespace-alive:
+  run-bot:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Install Python
-        uses: actions/setup-python@v2
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          python-version: '3.x'
+          node-version: '18' # or '20' if your code needs it
 
-      - name: Install dependencies
-        run: pip install pyCraft
+      - name: 📦 Install dependencies
+        run: npm install
 
-      - name: Run Python script
-        run: |
-          python main.py
+      - name: 🚀 Run Minecraft bot
+        run: node bot.js
